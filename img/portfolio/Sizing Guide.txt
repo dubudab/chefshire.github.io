@@ -1,0 +1,2 @@
+Large images - 1000x667
+Small images - 400x267
