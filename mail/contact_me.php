@@ -5,7 +5,7 @@ if(empty($_POST['name'])  		||
    empty($_POST['message'])	||
    !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL))
    {
-	echo "No arguments Provided!";
+	echo "No arguments provided!";
 	return false;
    }
 	
@@ -21,34 +21,4 @@ $headers = "From: noreply@chefshire.page\n"; // This is the email address the ge
 $headers .= "Reply-To: $email_address";	
 mail($to,$email_subject,$email_body,$headers);
 return true;		
-
-function IsInjected($str)
-{
-    $injections = array('(\n+)',
-           '(\r+)',
-           '(\t+)',
-           '(%0A+)',
-           '(%0D+)',
-           '(%08+)',
-           '(%09+)'
-           );
-               
-    $inject = join('|', $injections);
-    $inject = "/$inject/i";
-    
-    if(preg_match($inject,$str))
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-}
-
-if(IsInjected($visitor_email))
-{
-    echo "Bad email value!";
-    exit;
-}	
 ?>
