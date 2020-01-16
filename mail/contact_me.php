@@ -20,5 +20,35 @@ $email_body = "You have received a new message from your website inquiry form.\n
 $headers = "From: noreply@chefshire.page\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
 $headers .= "Reply-To: $email_address";	
 mail($to,$email_subject,$email_body,$headers);
-return true;			
+return true;		
+
+function IsInjected($str)
+{
+    $injections = array('(\n+)',
+           '(\r+)',
+           '(\t+)',
+           '(%0A+)',
+           '(%0D+)',
+           '(%08+)',
+           '(%09+)'
+           );
+               
+    $inject = join('|', $injections);
+    $inject = "/$inject/i";
+    
+    if(preg_match($inject,$str))
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+}
+
+if(IsInjected($visitor_email))
+{
+    echo "Bad email value!";
+    exit;
+}	
 ?>
