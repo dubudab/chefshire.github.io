@@ -18,7 +18,7 @@ $to = 'inquiry@chefshire.page'; // Add your email address inbetween the '' repla
 $email_subject = "Website Inquiry:  $name";
 $email_body = "You have received a new message from your website inquiry form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email_address\n\nMessage:\n$message";
 $headers = "From: $email_address\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
-$headers = "Reply-To: $email_address";	
+$headers .= "Reply-To: $email_address";	
 mail($to,$email_subject,$email_body,$headers);
 return true;		
 ?>
